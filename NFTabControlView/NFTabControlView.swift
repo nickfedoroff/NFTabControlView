@@ -20,29 +20,66 @@ public protocol NFTabControlViewDelegate {
     func tabControlView(colorFor controlView: NFTabControlView) -> UIColor
     /// Sets the font of the tab titles
     func tabControlView(fontFor controlView: NFTabControlView) -> UIFont?
+    /// Sets the width of the indicator
+    func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
 }
 
 public extension NFTabControlViewDelegate {
     func tabControlView(fontFor controlView: NFTabControlView) -> UIFont? {
         return nil
     }
+    
+    func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle? {
+        return nil
+    }
 }
 
-public class NFTabControlView: UIView {
+public enum NFTabControlViewIndicatorStyle {
+    case custom(CGFloat)
+    case max
+    case dot
+}
+
+public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
     
-    let nibName = String(describing: NFTabControlView.self)
+    private let nibName = String(describing: NFTabControlView.self)
+    
     @IBOutlet var view: UIView!
     @IBOutlet weak var segmentedControl: BorderlessSegmentedControl!
     @IBOutlet weak var indicator: UIView!
     @IBOutlet weak var indicatorHorizPositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var indicatorVertPositionConstraint: NSLayoutConstraint!
     
-    public var color: UIColor? {
+    @IBOutlet weak var indicatorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var indicatorHeightConstraint: NSLayoutConstraint!
+    
+    private var color: UIColor? {
         didSet {
             if let color = color {
                 segmentedControl.tintColor = color
                 indicator.backgroundColor = color
             }
+        }
+    }
+    
+    private var indicatorStyle: NFTabControlViewIndicatorStyle? {
+        didSet {
+            guard let indicatorStyle = indicatorStyle else {
+                return
+            }
+            
+            switch indicatorStyle {
+            case .custom(let width):
+                print(width)
+            case .dot:
+                print("dot")
+                indicatorWidthConstraint.constant = indicatorHeightConstraint.constant
+                indicator.layer.cornerRadius = indicatorHeightConstraint.constant / 2
+                indicator.layer.masksToBounds = true
+            case .max:
+                print("max")
+            }
+            
         }
     }
     
@@ -62,7 +99,6 @@ public class NFTabControlView: UIView {
         commonInit()
     }
     
-    
     private func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
@@ -71,7 +107,6 @@ public class NFTabControlView: UIView {
         return view
     }
     
-    
     private func commonInit() {
         Bundle(for: NFTabControlView.self).loadNibNamed(nibName, owner: self, options: nil)
         guard let content = view else { return }
@@ -79,10 +114,9 @@ public class NFTabControlView: UIView {
         content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.addSubview(content)
         
-        // custom code
         view.backgroundColor = .clear
         segmentedControl.selectedSegmentIndex = 0
-        
+
     }
     
     ///Applies delegate settings
@@ -109,9 +143,22 @@ public class NFTabControlView: UIView {
             let font = UIFont.systemFont(ofSize: 13)
             segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
         }
+        
+        // Indicator Style
+        if let style = delegate.tabControlView(indicatorSizeFor: self) {
+            indicatorStyle = style
+        }
     }
     
     override public func draw(_ rect: CGRect) {
+        
+        switch indicatorStyle {
+        case .some(.max):
+            indicatorWidthConstraint.constant = view.bounds.width / CGFloat(segmentedControl.numberOfSegments)
+        default:
+            break
+        }
+        
         setIndicatorPosition(forSegmentAt: segmentedControl.selectedSegmentIndex, animated: false)
     }
     
@@ -120,7 +167,7 @@ public class NFTabControlView: UIView {
         setIndicatorPosition(forSegmentAt: sender.selectedSegmentIndex, animated: true)
     }
     
-    private func setIndicatorPosition(forSegmentAt index: Int, animated: Bool) {
+    public func setIndicatorPosition(forSegmentAt index: Int, animated: Bool) {
         let segmentWidth = bounds.width / CGFloat(segmentedControl.numberOfSegments)
         let index = CGFloat(index + 1)
         let indicatorWidth = indicator.frame.width
@@ -132,4 +179,9 @@ public class NFTabControlView: UIView {
                 self.view.layoutIfNeeded()
                 }, completion: nil)
         }
-    }}
+    }
+    
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+}

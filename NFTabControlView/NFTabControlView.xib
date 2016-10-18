@@ -6,10 +6,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabControlView" customModule="simplebooth" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NFTabControlView" customModule="NFTabControlView" customModuleProvider="target">
             <connections>
                 <outlet property="indicator" destination="ouX-AT-pB8" id="Vby-5h-QnD"/>
+                <outlet property="indicatorHeightConstraint" destination="wH3-wZ-tke" id="Ku0-nB-IDF"/>
                 <outlet property="indicatorHorizPositionConstraint" destination="CW6-Bi-ft8" id="6KL-p5-Wh2"/>
+                <outlet property="indicatorWidthConstraint" destination="jy2-W4-hI7" id="YHs-bo-1p5"/>
                 <outlet property="segmentedControl" destination="Bc3-ay-o5F" id="qKd-JP-uCM"/>
                 <outlet property="view" destination="iN0-l3-epB" id="hEB-hH-nRs"/>
             </connections>
@@ -19,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="28"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bc3-ay-o5F" customClass="BorderlessSegmentedControl" customModule="simplebooth" customModuleProvider="target">
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bc3-ay-o5F" customClass="BorderlessSegmentedControl" customModule="NFTabControlView" customModuleProvider="target">
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -37,6 +39,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="Bc3-ay-o5F" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0SL-lp-KaS"/>
                 <constraint firstItem="ouX-AT-pB8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="CW6-Bi-ft8"/>
