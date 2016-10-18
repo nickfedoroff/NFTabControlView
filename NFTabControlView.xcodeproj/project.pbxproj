@@ -10,7 +10,7 @@
 		AFA059061DB5CB860045A8C3 /* NFTabControlView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA058FC1DB5CB860045A8C3 /* NFTabControlView.framework */; };
 		AFA0590B1DB5CB860045A8C3 /* NFTabControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0590A1DB5CB860045A8C3 /* NFTabControlViewTests.swift */; };
 		AFA0590D1DB5CB860045A8C3 /* NFTabControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = AFA058FF1DB5CB860045A8C3 /* NFTabControlView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFA059181DB5CBBE0045A8C3 /* TabControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */; };
+		AFA059181DB5CBBE0045A8C3 /* NFTabControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA059161DB5CBBE0045A8C3 /* NFTabControlView.swift */; };
 		AFA059191DB5CBBE0045A8C3 /* NFTabControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA059171DB5CBBE0045A8C3 /* NFTabControlView.xib */; };
 		AFA0591B1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */; };
 /* End PBXBuildFile section */
@@ -32,7 +32,7 @@
 		AFA059051DB5CB860045A8C3 /* NFTabControlViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFTabControlViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFA0590A1DB5CB860045A8C3 /* NFTabControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTabControlViewTests.swift; sourceTree = "<group>"; };
 		AFA0590C1DB5CB860045A8C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabControlView.swift; sourceTree = "<group>"; };
+		AFA059161DB5CBBE0045A8C3 /* NFTabControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NFTabControlView.swift; sourceTree = "<group>"; };
 		AFA059171DB5CBBE0045A8C3 /* NFTabControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NFTabControlView.xib; sourceTree = "<group>"; };
 		AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessSegmentedControl.swift; sourceTree = "<group>"; };
 		AFA0591D1DB5D2160045A8C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				AFA058FF1DB5CB860045A8C3 /* NFTabControlView.h */,
-				AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */,
+				AFA059161DB5CBBE0045A8C3 /* NFTabControlView.swift */,
 				AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */,
 				AFA059171DB5CBBE0045A8C3 /* NFTabControlView.xib */,
 				AFA059001DB5CB860045A8C3 /* Info.plist */,
@@ -220,7 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFA0591B1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift in Sources */,
-				AFA059181DB5CBBE0045A8C3 /* TabControlView.swift in Sources */,
+				AFA059181DB5CBBE0045A8C3 /* NFTabControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
