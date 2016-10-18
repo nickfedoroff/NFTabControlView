@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = "This flexible control works a lot like UISegmentedControl, only with nice delegate methods for selecting tabs, a fun animation, and configurable colors."
 
-  s.homepage     = "http://EXAMPLE/NFTabControlView"
+  s.homepage     = "https://github.com/nickfedoroff/NFTabControlView"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT"
+  s.license      = { :type => 'MIT' }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -50,10 +50,10 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Nick Fedoroff" => "nick@endorphinapps.com" }
+  s.author             = { "Nick Fedoroff" => "nick@nickfedoroff.com" }
   # Or just: s.author    = "Nick Fedoroff"
   # s.authors            = { "Nick Fedoroff" => "nick@endorphinapps.com" }
-  # s.social_media_url   = "http://twitter.com/Nick Fedoroff"
+  s.social_media_url   = "http://twitter.com/nfedoroff"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -62,7 +62,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  # s.platform     = :ios, "9.3"
+  s.platform     = :ios, "9.3"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -71,7 +71,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/nickfedoroff/NFTabControlView", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/nickfedoroff/NFTabControlView.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -83,8 +83,8 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "NFTabControlView", "NFTabControlView/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
+
+
   # s.public_header_files = "Classes/**/*.h"
 
 

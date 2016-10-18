@@ -13,6 +13,7 @@
 		AFA059181DB5CBBE0045A8C3 /* TabControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */; };
 		AFA059191DB5CBBE0045A8C3 /* TabControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA059171DB5CBBE0045A8C3 /* TabControlView.xib */; };
 		AFA0591B1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */; };
+		AFA0591E1DB5D2160045A8C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA0591D1DB5D2160045A8C3 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabControlView.swift; sourceTree = "<group>"; };
 		AFA059171DB5CBBE0045A8C3 /* TabControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabControlView.xib; sourceTree = "<group>"; };
 		AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessSegmentedControl.swift; sourceTree = "<group>"; };
+		AFA0591D1DB5D2160045A8C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA0591E1DB5D2160045A8C3 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +65,7 @@
 				AFA058FE1DB5CB860045A8C3 /* NFTabControlView */,
 				AFA059091DB5CB860045A8C3 /* NFTabControlViewTests */,
 				AFA058FD1DB5CB860045A8C3 /* Products */,
+				AFA0591C1DB5D2160045A8C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +97,14 @@
 				AFA0590C1DB5CB860045A8C3 /* Info.plist */,
 			);
 			path = NFTabControlViewTests;
+			sourceTree = "<group>";
+		};
+		AFA0591C1DB5D2160045A8C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFA0591D1DB5D2160045A8C3 /* UIKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
