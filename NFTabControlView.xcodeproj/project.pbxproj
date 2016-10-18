@@ -10,6 +10,9 @@
 		AFA059061DB5CB860045A8C3 /* NFTabControlView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA058FC1DB5CB860045A8C3 /* NFTabControlView.framework */; };
 		AFA0590B1DB5CB860045A8C3 /* NFTabControlViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0590A1DB5CB860045A8C3 /* NFTabControlViewTests.swift */; };
 		AFA0590D1DB5CB860045A8C3 /* NFTabControlView.h in Headers */ = {isa = PBXBuildFile; fileRef = AFA058FF1DB5CB860045A8C3 /* NFTabControlView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFA059181DB5CBBE0045A8C3 /* TabControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */; };
+		AFA059191DB5CBBE0045A8C3 /* TabControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA059171DB5CBBE0045A8C3 /* TabControlView.xib */; };
+		AFA0591B1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		AFA059051DB5CB860045A8C3 /* NFTabControlViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFTabControlViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFA0590A1DB5CB860045A8C3 /* NFTabControlViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTabControlViewTests.swift; sourceTree = "<group>"; };
 		AFA0590C1DB5CB860045A8C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabControlView.swift; sourceTree = "<group>"; };
+		AFA059171DB5CBBE0045A8C3 /* TabControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabControlView.xib; sourceTree = "<group>"; };
+		AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderlessSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				AFA058FF1DB5CB860045A8C3 /* NFTabControlView.h */,
+				AFA059161DB5CBBE0045A8C3 /* TabControlView.swift */,
+				AFA0591A1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift */,
+				AFA059171DB5CBBE0045A8C3 /* TabControlView.xib */,
 				AFA059001DB5CB860045A8C3 /* Info.plist */,
 			);
 			path = NFTabControlView;
@@ -149,6 +158,7 @@
 					AFA058FB1DB5CB860045A8C3 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 4RHDGVFNPK;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					AFA059041DB5CB860045A8C3 = {
@@ -181,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA059191DB5CBBE0045A8C3 /* TabControlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA0591B1DB5CC0C0045A8C3 /* BorderlessSegmentedControl.swift in Sources */,
+				AFA059181DB5CBBE0045A8C3 /* TabControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +335,7 @@
 		AFA059111DB5CB860045A8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4RHDGVFNPK;
@@ -334,6 +348,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nickfedoroff.NFTabControlView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -341,6 +356,7 @@
 		AFA059121DB5CB860045A8C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4RHDGVFNPK;
@@ -360,6 +376,7 @@
 		AFA059141DB5CB860045A8C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 4RHDGVFNPK;
 				INFOPLIST_FILE = NFTabControlViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -372,6 +389,7 @@
 		AFA059151DB5CB860045A8C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 4RHDGVFNPK;
 				INFOPLIST_FILE = NFTabControlViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
