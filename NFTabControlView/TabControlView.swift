@@ -5,52 +5,37 @@
 //  Created by Nick Fedoroff on 10/17/16.
 //  Copyright © 2016 Nick Fedoroff. All rights reserved.
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+
 
 import UIKit
 
 
-protocol TabControlViewDelegate {
+public protocol NFTabControlViewDelegate {
     
-    func tabControlView(controlView: TabControlView, didSelectTabAt index: Int)
+    func tabControlView(controlView: NFTabControlView, didSelectTabAt index: Int)
     /// Determines the number and titles of tabs.
     /// Tabs are arranged in the order provided in the array.
-    func tabControlView(titlesForTabsIn controlView: TabControlView) -> [String]
+    func tabControlView(titlesForTabsIn controlView: NFTabControlView) -> [String]
     /// Sets the color of the text and indicator
-    func tabControlView(colorFor controlView: TabControlView) -> UIColor
+    func tabControlView(colorFor controlView: NFTabControlView) -> UIColor
     /// Sets the font of the tab titles
-    func tabControlView(fontFor controlView: TabControlView) -> UIFont?
+    func tabControlView(fontFor controlView: NFTabControlView) -> UIFont?
 }
 
-extension TabControlViewDelegate {
-    func tabControlView(fontFor controlView: TabControlView) -> UIFont? {
+public extension NFTabControlViewDelegate {
+    func tabControlView(fontFor controlView: NFTabControlView) -> UIFont? {
         return nil
     }
 }
 
-class TabControlView: UIView {
+public class NFTabControlView: UIView {
     
-    let nibName = String(describing: TabControlView.self)
+    let nibName = String(describing: NFTabControlView.self)
     @IBOutlet var view: UIView!
     @IBOutlet weak var segmentedControl: BorderlessSegmentedControl!
     @IBOutlet weak var indicator: UIView!
     @IBOutlet weak var indicatorHorizPositionConstraint: NSLayoutConstraint!
+    @IBOutlet weak var indicatorVertPositionConstraint: NSLayoutConstraint!
     
     public var color: UIColor? {
         didSet {
@@ -61,11 +46,22 @@ class TabControlView: UIView {
         }
     }
     
-    var delegate: TabControlViewDelegate? {
+    public var delegate: NFTabControlViewDelegate? {
         didSet {
-            commonInit()
+            setup()
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
     
     private func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
@@ -75,8 +71,9 @@ class TabControlView: UIView {
         return view
     }
     
+    
     private func commonInit() {
-        Bundle(for: TabControlView.self).loadNibNamed(nibName, owner: self, options: nil)
+        Bundle(for: NFTabControlView.self).loadNibNamed(nibName, owner: self, options: nil)
         guard let content = view else { return }
         content.frame = self.bounds
         content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -84,8 +81,12 @@ class TabControlView: UIView {
         
         // custom code
         view.backgroundColor = .clear
-//        indicator.layer.cornerRadius = 1.5
-//        indicator.layer.masksToBounds = true
+        segmentedControl.selectedSegmentIndex = 0
+        
+    }
+    
+    ///Applies delegate settings
+    private func setup() {
         guard let delegate = delegate else {
             return
         }
@@ -108,10 +109,9 @@ class TabControlView: UIView {
             let font = UIFont.systemFont(ofSize: 13)
             segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
         }
-        
     }
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         setIndicatorPosition(forSegmentAt: segmentedControl.selectedSegmentIndex, animated: false)
     }
     
@@ -130,10 +130,6 @@ class TabControlView: UIView {
         if animated == true {
             UIView.animate(withDuration: 0.25, delay: 0.0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.0, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
-            }, completion: nil)
+                }, completion: nil)
         }
-    }
-
-    
-    
-}
+    }}
