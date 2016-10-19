@@ -20,15 +20,18 @@ public protocol NFTabControlViewDelegate {
     func tabControlView(colorFor controlView: NFTabControlView) -> UIColor
     /// Sets the font of the tab titles
     func tabControlView(fontFor controlView: NFTabControlView) -> UIFont?
+    func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont?
     /// Sets the width of the indicator
     func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
 }
 
 public extension NFTabControlViewDelegate {
     func tabControlView(fontFor controlView: NFTabControlView) -> UIFont? {
-        return nil
+        return UIFont.systemFont(ofSize: 13)
     }
-    
+    func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont? {
+        return UIFont.boldSystemFont(ofSize: 13)
+    }
     func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle? {
         return nil
     }
@@ -137,12 +140,12 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
         self.color = delegate.tabControlView(colorFor: self)
         
         // Font
-        if let font = delegate.tabControlView(fontFor: self) {
-            segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
-        } else {
-            let font = UIFont.systemFont(ofSize: 13)
-            segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
-        }
+        let font = delegate.tabControlView(fontFor: self)!
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
+        
+        let selectedFont = delegate.tabControlView(fontForselectedTabIn: self)!
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: selectedFont], for: .selected)
+        
         
         // Indicator Style
         if let style = delegate.tabControlView(indicatorSizeFor: self) {
