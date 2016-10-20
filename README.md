@@ -4,6 +4,8 @@ An iOS tab control that just works.
 ## Learn About It
 `NFTabControlView` is very similar to `UISegmentedControl` only with a delegate-base interface and a nice animated tab indicator.
 
+![alt tag](https://nickfedoroff.com/images/tabdemo.gif)
+
 ## Install It
 
 ### Cocoapods
