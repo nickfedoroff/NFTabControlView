@@ -16,7 +16,7 @@ Download and drag `NFTabControlView.swift` and `NFTabControlView.xib` into your 
 1. Create an instance of `NFTabControlView` either in a storyboard or using the `init:frame` initializer.
 2. Assign a delegate and implement required methods.
 
-**Required METHODS**
+**REQUIRED METHODS**
 
 Text and indicator color:
 ```swift
