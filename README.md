@@ -10,7 +10,7 @@ An iOS tab control that just works.
 Coming soon.
 
 ### Manual Installation
-Download and drag the files into your Swift 3 project.
+Download and drag `NFTabControlView.swift` and `NFTabControlView.xib` into your Swift 3 project.
 
 ## Use It
 1. Create an instance of `NFTabControlView` either in a storyboard or using the `init:frame` initializer.
