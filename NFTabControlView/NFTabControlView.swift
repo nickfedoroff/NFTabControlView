@@ -26,7 +26,7 @@ public protocol NFTabControlViewDelegate {
     func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont?
     
     /// Sets the width of the indicator
-    func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
+    func tabControlView(indicatorStyleFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
 }
 
 public extension NFTabControlViewDelegate {
@@ -36,7 +36,7 @@ public extension NFTabControlViewDelegate {
     func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont? {
         return UIFont.boldSystemFont(ofSize: 13)
     }
-    func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle? {
+    func tabControlView(indicatorStyleFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle? {
         return nil
     }
 }
@@ -147,7 +147,7 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
         
         
         // Indicator Style
-        if let style = delegate.tabControlView(indicatorSizeFor: self) {
+        if let style = delegate.tabControlView(indicatorStyleFor: self) {
             indicatorStyle = style
         }
         
