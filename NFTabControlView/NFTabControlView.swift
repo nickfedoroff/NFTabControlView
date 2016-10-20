@@ -13,14 +13,18 @@ import UIKit
 public protocol NFTabControlViewDelegate {
     
     func tabControlView(controlView: NFTabControlView, didSelectTabAt index: Int)
+    
     /// Determines the number and titles of tabs.
     /// Tabs are arranged in the order provided in the array.
     func tabControlView(titlesForTabsIn controlView: NFTabControlView) -> [String]
+    
     /// Sets the color of the text and indicator
     func tabControlView(colorFor controlView: NFTabControlView) -> UIColor
+    
     /// Sets the font of the tab titles
     func tabControlView(fontFor controlView: NFTabControlView) -> UIFont?
     func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont?
+    
     /// Sets the width of the indicator
     func tabControlView(indicatorSizeFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
 }
@@ -38,8 +42,7 @@ public extension NFTabControlViewDelegate {
 }
 
 public enum NFTabControlViewIndicatorStyle {
-    case custom(CGFloat)
-    case max
+    case tabWidth
     case dot
 }
 
@@ -52,7 +55,6 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
     @IBOutlet weak var indicator: UIView!
     @IBOutlet weak var indicatorHorizPositionConstraint: NSLayoutConstraint!
     @IBOutlet weak var indicatorVertPositionConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var indicatorWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var indicatorHeightConstraint: NSLayoutConstraint!
     
@@ -72,14 +74,11 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
             }
             
             switch indicatorStyle {
-            case .custom(let width):
-                print(width)
             case .dot:
-                print("dot")
                 indicatorWidthConstraint.constant = indicatorHeightConstraint.constant
                 indicator.layer.cornerRadius = indicatorHeightConstraint.constant / 2
                 indicator.layer.masksToBounds = true
-            case .max:
+            case .tabWidth:
                 print("max")
             }
             
@@ -122,7 +121,7 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
 
     }
     
-    ///Applies delegate settings
+    ///Apply delegate settings
     private func setup() {
         guard let delegate = delegate else {
             return
@@ -151,17 +150,17 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
         if let style = delegate.tabControlView(indicatorSizeFor: self) {
             indicatorStyle = style
         }
+        
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        if indicatorStyle == .some(.tabWidth) {
+            indicatorWidthConstraint.constant = view.bounds.width / CGFloat(segmentedControl.numberOfSegments)
+        }
     }
     
     override public func draw(_ rect: CGRect) {
-        
-        switch indicatorStyle {
-        case .some(.max):
-            indicatorWidthConstraint.constant = view.bounds.width / CGFloat(segmentedControl.numberOfSegments)
-        default:
-            break
-        }
-        
         setIndicatorPosition(forSegmentAt: segmentedControl.selectedSegmentIndex, animated: false)
     }
     
