@@ -11,34 +11,7 @@ import UIKit
 
 
 public protocol NFTabControlViewDelegate {
-    
     func tabControlView(controlView: NFTabControlView, didSelectTabAt index: Int)
-    
-    /// Determines the number and titles of tabs.
-    /// Tabs are arranged in the order provided in the array.
-    func tabControlView(titlesForTabsIn controlView: NFTabControlView) -> [String]
-    
-    /// Sets the color of the text and indicator
-    func tabControlView(colorFor controlView: NFTabControlView) -> UIColor
-    
-    /// Sets the font of the tab titles
-    func tabControlView(fontFor controlView: NFTabControlView) -> UIFont?
-    func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont?
-    
-    /// Sets the width of the indicator
-    func tabControlView(indicatorStyleFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle?
-}
-
-public extension NFTabControlViewDelegate {
-    func tabControlView(fontFor controlView: NFTabControlView) -> UIFont? {
-        return UIFont.systemFont(ofSize: 13)
-    }
-    func tabControlView(fontForselectedTabIn controlView: NFTabControlView) -> UIFont? {
-        return UIFont.boldSystemFont(ofSize: 13)
-    }
-    func tabControlView(indicatorStyleFor controlView: NFTabControlView) -> NFTabControlViewIndicatorStyle? {
-        return nil
-    }
 }
 
 public enum NFTabControlViewIndicatorStyle {
@@ -46,7 +19,7 @@ public enum NFTabControlViewIndicatorStyle {
     case dot
 }
 
-public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
+public class NFTabControlView: UIView {
     
     private let nibName = String(describing: NFTabControlView.self)
     
@@ -58,20 +31,16 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
     @IBOutlet weak var indicatorWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var indicatorHeightConstraint: NSLayoutConstraint!
     
-    private var color: UIColor? {
+    public private(set) var color: UIColor? {
         didSet {
-            if let color = color {
-                segmentedControl.tintColor = color
-                indicator.backgroundColor = color
-            }
+            segmentedControl.tintColor = color
+            indicator.backgroundColor = color
         }
     }
     
-    private var indicatorStyle: NFTabControlViewIndicatorStyle? {
+    public private(set) var indicatorStyle: NFTabControlViewIndicatorStyle? {
         didSet {
-            guard let indicatorStyle = indicatorStyle else {
-                return
-            }
+            guard let indicatorStyle = indicatorStyle else { return }
             
             switch indicatorStyle {
             case .dot:
@@ -81,15 +50,10 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
             case .tabWidth:
                 print("max")
             }
-            
         }
     }
     
-    public var delegate: NFTabControlViewDelegate? {
-        didSet {
-            setup()
-        }
-    }
+    public var delegate: NFTabControlViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,45 +83,46 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
         view.backgroundColor = .clear
         segmentedControl.selectedSegmentIndex = 0
 
+        NotificationCenter.default.addObserver(self, selector: #selector(NFTabControlView.respondToOrientationChange(notification:)), name: Notification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
-    ///Apply delegate settings
-    private func setup() {
-        guard let delegate = delegate else {
-            return
-        }
-        
-        // Set up tabs
+    // Public Methods
+    
+    public func setIndicator(style: NFTabControlViewIndicatorStyle) {
+        indicatorStyle = style
+    }
+    
+    public func setNormal(font: UIFont) {
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
+    }
+    
+    public func setSelected(font: UIFont) {
+        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .selected)
+    }
+    
+    public func set(tabs: [String]) {
         segmentedControl.removeAllSegments()
-        let titles = delegate.tabControlView(titlesForTabsIn: self)
-        for (index, title) in titles.enumerated() {
-            segmentedControl.insertSegment(withTitle: title, at: index, animated: false)
+        for (index, tab) in tabs.enumerated() {
+            segmentedControl.insertSegment(withTitle: tab, at: index, animated: false)
         }
         segmentedControl.selectedSegmentIndex = 0
-        
-        // Color
-        self.color = delegate.tabControlView(colorFor: self)
-        
-        // Font
-        let font = delegate.tabControlView(fontFor: self)!
-        segmentedControl.setTitleTextAttributes([NSFontAttributeName: font], for: .normal)
-        
-        let selectedFont = delegate.tabControlView(fontForselectedTabIn: self)!
-        segmentedControl.setTitleTextAttributes([NSFontAttributeName: selectedFont], for: .selected)
-        
-        
-        // Indicator Style
-        if let style = delegate.tabControlView(indicatorStyleFor: self) {
-            indicatorStyle = style
-        }
-        
     }
+    
+    public func set(color: UIColor) {
+        self.color = color
+    }
+    
+    // Private/Internal Methods
     
     public override func layoutSubviews() {
         super.layoutSubviews()
         if indicatorStyle == .some(.tabWidth) {
             indicatorWidthConstraint.constant = view.bounds.width / CGFloat(segmentedControl.numberOfSegments)
         }
+    }
+    
+    @objc private func respondToOrientationChange(notification: Notification) {
+        setIndicatorPosition(forSegmentAt: segmentedControl.selectedSegmentIndex, animated: false)
     }
     
     override public func draw(_ rect: CGRect) {
@@ -183,9 +148,10 @@ public class NFTabControlView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
+    
 }
 
 
